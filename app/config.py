@@ -7,7 +7,7 @@ load_dotenv()
 # API Settings
 DEEPSEEK_API_KEY = os.getenv("deepseek_api_key")
 BASE_URL = "https://openrouter.ai/api/v1"
-MODEL_NAME = "deepseek/deepseek-r1:free"
+MODEL_NAME = "deepseek/deepseek-chat-v3-0324:free"
 
 # Application Settings
 APP_NAME = "Postmaster Chatbot"
