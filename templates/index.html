@@ -9,128 +9,181 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #8033c8;
-            --secondary-color: #e9ddf8;
-            --accent-color: #6b21a8;
-            --text-color: #333333;
-            --light-text: #666666;
-            --bg-color: #f8f9fa;
-            --card-bg: #ffffff;
-            --border-color: #e6e6e6;
+            --primary: #7c3aed;
+            --primary-dark: #5b21b6;
+            --surface: #f6f6f8;
+            --surface-alt: #fff;
+            --border: #e5e7eb;
+            --user-bg: #ede9fe;
+            --ai-bg: #7c3aed;
+            --ai-text: #fff;
+            --user-text: #5b21b6;
+            --radius: 18px;
+            --shadow: 0 6px 32px 0 rgba(60, 60, 100, 0.10);
+            --header-text: #232323;
+            --subheader-text: #666;
+            --input-bg: #f3f3fa;
+            --input-text: #232323;
+            --footer-text: #888;
         }
-        
-        * {
-            box-sizing: border-box;
+        body[data-theme="dark"] {
+            --surface: #181a20;
+            --surface-alt: #23242a;
+            --border: #23242a;
+            --user-bg: #23242a;
+            --ai-bg: #2d2e36;
+            --ai-text: #fff;
+            --user-text: #b6aaff;
+            --header-text: #e5e7eb;
+            --subheader-text: #bdbdbd;
+            --input-bg: #23242a;
+            --input-text: #e5e7eb;
+            --footer-text: #bdbdbd;
+        }
+        html, body {
+            height: 100%;
             margin: 0;
             padding: 0;
-        }
-        
-        body {
+            background: var(--surface);
             font-family: 'Inter', 'Noto Sans Bengali', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
+            color: var(--header-text);
         }
-        
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 2rem 1rem;
-        }
-        
-        .chat-container {
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            overflow: hidden;
+        body {
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            height: 80vh;
+            align-items: center;
+            justify-content: center;
         }
-        
-        .chat-header {
-            background-color: var(--primary-color);
-            padding: 1.2rem 1.5rem;
-            color: white;
+        .deepseek-shell {
+            width: 100vw;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .deepseek-header {
+            margin-top: 5vh;
+            text-align: center;
+        }
+        .deepseek-logo {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid var(--border-color);
+            justify-content: center;
+            gap: 0.7rem;
+            font-size: 2.1rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.2em;
         }
-        
-        .chat-header h1 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin: 0;
+        .deepseek-logo svg {
+            width: 2.2rem;
+            height: 2.2rem;
+            vertical-align: middle;
+        }
+        .deepseek-title {
             font-family: 'Noto Sans Bengali', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--header-text);
         }
-        
-        .chat-messages {
-            flex: 1;
-            padding: 1.5rem;
-            overflow-y: auto;
+        .deepseek-subheader {
+            font-size: 1.08rem;
+            color: var(--subheader-text);
+            margin-top: 0.2em;
+            margin-bottom: 2.5em;
+        }
+        .deepseek-chat-card {
+            background: var(--surface-alt);
+            border-radius: 1.5em;
+            box-shadow: var(--shadow);
+            width: 100%;
+            max-width: 700px;
+            min-width: 320px;
+            margin: 0 auto;
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            align-items: stretch;
+            border: 1px solid var(--border);
         }
-        
-        .message {
-            max-width: 80%;
-            padding: 0.8rem 1.2rem;
-            border-radius: 12px;
+        .deepseek-messages {
+            min-height: 180px;
+            max-height: 320px;
+            overflow-y: auto;
+            padding: 1.2em 1.2em 0.5em 1.2em;
+            display: flex;
+            flex-direction: column;
+            gap: 1.1rem;
+        }
+        .deepseek-message {
+            max-width: 85%;
+            padding: 0.85rem 1.2rem;
+            border-radius: 1.2em;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            word-break: break-word;
+            box-shadow: 0 1px 4px 0 rgba(124,58,237,0.04);
             position: relative;
-            word-wrap: break-word;
         }
-        
-        .user-message {
-            background-color: var(--secondary-color);
-            color: var(--accent-color);
+        .deepseek-message.user {
+            background: var(--user-bg);
+            color: var(--user-text);
             align-self: flex-end;
-            border-bottom-right-radius: 0;
+            border-bottom-right-radius: 0.5em;
         }
-        
-        .bot-message {
-            background-color: var(--primary-color);
-            color: white;
+        .deepseek-message.ai {
+            background: var(--ai-bg);
+            color: var(--ai-text);
             align-self: flex-start;
-            border-bottom-left-radius: 0;
+            border-bottom-left-radius: 0.5em;
         }
-        
-        .message-timestamp {
+        .deepseek-timestamp {
             font-size: 0.7rem;
             text-align: right;
             margin-top: 0.3rem;
-            opacity: 0.7;
+            opacity: 0.6;
         }
-        
-        .message-input-container {
-            padding: 1rem 1.5rem;
-            background-color: var(--card-bg);
-            border-top: 1px solid var(--border-color);
+        .deepseek-typing {
+            font-size: 1rem;
+            color: #888;
+            font-style: italic;
+            background: #f3f3fa;
+            border-radius: 1em;
+            padding: 0.5em 1em;
+            align-self: flex-start;
+            display: none;
         }
-        
-        .message-input-wrapper {
+        .deepseek-input-area {
+            background: var(--surface-alt);
+            border-top: 1px solid var(--border);
+            padding: 1.1em 1.2em;
             display: flex;
             align-items: center;
-            background-color: var(--bg-color);
-            border: 1px solid var(--border-color);
-            border-radius: 24px;
-            padding: 0.2rem;
+            gap: 0.7rem;
         }
-        
-        .message-input {
+        .deepseek-input-wrapper {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            background: var(--input-bg);
+            border: 1px solid var(--border);
+            border-radius: 2em;
+            padding: 0.2rem 0.7rem;
+        }
+        .deepseek-input {
             flex: 1;
             border: none;
             background: transparent;
-            padding: 0.8rem 1rem;
+            padding: 0.8rem 0.5rem;
             font-size: 1rem;
             outline: none;
-            font-family: 'Inter', 'Noto Sans Bengali', sans-serif;
+            font-family: inherit;
+            color: var(--input-text);
         }
-        
-        .send-button {
-            background-color: var(--primary-color);
-            color: white;
+        .deepseek-send-btn {
+            background: var(--primary);
+            color: #fff;
             border: none;
             border-radius: 50%;
             width: 40px;
@@ -139,85 +192,121 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: background-color 0.2s;
+            transition: background 0.2s;
+            font-size: 1.2rem;
         }
-        
-        .send-button:hover {
-            background-color: var(--accent-color);
+        .deepseek-send-btn:hover {
+            background: var(--primary-dark);
         }
-        
-        .typing-indicator {
-            padding: 0.5rem 1rem;
-            background-color: rgba(0,0,0,0.05);
-            border-radius: 12px;
-            font-style: italic;
-            align-self: flex-start;
-            display: none;
-            color: var(--light-text);
-        }
-        
         .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
             text-align: center;
-            padding: 1rem;
-            font-size: 0.85rem;
-            color: var(--light-text);
-            margin-top: 1rem;
+            padding: 0.7rem 0.5rem 0.7rem 0.5rem;
+            font-size: 0.95rem;
+            color: var(--footer-text);
+            background: rgba(24, 26, 32, 0.92);
+            z-index: 100;
+            border-top: 1px solid var(--border);
+            box-shadow: 0 -2px 12px 0 rgba(60, 60, 100, 0.07);
+            backdrop-filter: blur(2px);
         }
-        
         .github-link {
-            color: var(--primary-color);
+            color: var(--primary);
             text-decoration: none;
             font-weight: 500;
         }
-        
         .github-link:hover {
             text-decoration: underline;
         }
-        
-        .svg-icon {
-            width: 24px;
-            height: 24px;
-            fill: currentColor;
+        .theme-toggle-btn {
+            position: absolute;
+            top: 1.2rem;
+            right: 1.2rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.3rem;
+            color: var(--primary);
+            transition: color 0.2s;
+        }
+        .theme-toggle-btn:hover {
+            color: var(--primary-dark);
+        }
+        @media (max-width: 600px) {
+            .deepseek-chat-card {
+                max-width: 100vw;
+                min-width: 0;
+                border-radius: 0;
+            }
+            .deepseek-header {
+                margin-top: 2vh;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="chat-container">
-            <div class="chat-header">
-                <h1>পৌচ মাস্টার AI</h1>
-                <span>Powered by Deepseek</span>
+    <div class="deepseek-shell">
+        <div class="deepseek-header">
+            <div class="deepseek-logo">
+                <svg viewBox="0 0 32 32" fill="none"><path d="M16.001 2.667c-7.364 0-13.334 5.97-13.334 13.333 0 7.364 5.97 13.334 13.334 13.334 7.363 0 13.333-5.97 13.333-13.334 0-7.363-5.97-13.333-13.333-13.333zm0 24c-5.89 0-10.667-4.777-10.667-10.667S10.11 5.333 16 5.333 26.667 10.11 26.667 16 21.89 26.667 16 26.667z" fill="currentColor"/><path d="M16 8.667a7.333 7.333 0 100 14.666 7.333 7.333 0 000-14.666zm0 12a4.667 4.667 0 110-9.334 4.667 4.667 0 010 9.334z" fill="currentColor"/></svg>
+                পৌচ মাস্টার AI
             </div>
-            
-            <div class="chat-messages" id="chat-messages">
-                <div class="message bot-message">
+            <div class="deepseek-title">Hi, I'm পৌচ মাস্টার AI.</div>
+            <div class="deepseek-subheader">How can I help you today?</div>
+            <button class="theme-toggle-btn" id="theme-toggle-btn" title="Toggle dark/light mode">
+                🌙
+            </button>
+        </div>
+        <div class="deepseek-chat-card">
+            <div class="deepseek-messages" id="chat-messages">
+                <div class="deepseek-message ai">
                     আমি তোমার পোস্টমাস্টার এআই সহায়ক। কী চাও তুমি? আমার সময় নষ্ট না করে, তাড়াতাড়ি বলো! (I am your Postmaster AI assistant. What do you want? Don't waste my time, tell me quickly!)
                 </div>
-                
-                <div class="typing-indicator" id="typing-indicator">
+                <div class="deepseek-typing" id="typing-indicator">
                     AI টাইপ করছে...
                 </div>
             </div>
-            
-            <div class="message-input-container">
-                <div class="message-input-wrapper">
-                    <input type="text" id="message-input" class="message-input" placeholder="আপনার মেসেজ লিখুন...">
-                    <button class="send-button" onclick="sendMessage()">
-                        <svg class="svg-icon" viewBox="0 0 24 24">
-                            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
-                        </svg>
-                    </button>
+            <div class="deepseek-input-area">
+                <div class="deepseek-input-wrapper">
+                    <input type="text" id="message-input" class="deepseek-input" placeholder="আপনার মেসেজ লিখুন...">
                 </div>
+                <button class="deepseek-send-btn" onclick="sendMessage()">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" fill="currentColor"/>
+                    </svg>
+                </button>
             </div>
         </div>
-        
-        <div class="footer">
-            &copy; 2025 পৌচ মাস্টার AI | Created by <a href="https://github.com/arnab9961" target="_blank" class="github-link">arnab</a> | 
-            Powered by <a href="https://deepseek.ai" target="_blank" class="github-link">Deepseek AI</a>
-        </div>
     </div>
-
+    <div class="footer">
+        &copy; 2025 পৌচ মাস্টার AI | Created by <a href="https://github.com/arnab9961" target="_blank" class="github-link">arnab</a> | 
+        Powered by <a href="https://deepseek.ai" target="_blank" class="github-link">Deepseek AI</a>
+    </div>
     <script>
+        // Theme toggle logic
+        const themeBtn = document.getElementById('theme-toggle-btn');
+        function setTheme(theme) {
+            document.body.setAttribute('data-theme', theme);
+            themeBtn.textContent = theme === 'dark' ? '🌙' : '☀️';
+            localStorage.setItem('deepseek-theme', theme);
+        }
+        function toggleTheme() {
+            const current = document.body.getAttribute('data-theme') || 'light';
+            setTheme(current === 'dark' ? 'light' : 'dark');
+        }
+        themeBtn.addEventListener('click', toggleTheme);
+        // On load, set theme from localStorage or system
+        (function() {
+            const saved = localStorage.getItem('deepseek-theme');
+            if (saved) setTheme(saved);
+            else if (window.matchMedia('(prefers-color-scheme: dark)').matches) setTheme('dark');
+            else setTheme('light');
+        })();
+
+        // Chat logic
         const messageInput = document.getElementById('message-input');
         const messagesContainer = document.getElementById('chat-messages');
         const typingIndicator = document.getElementById('typing-indicator');
@@ -263,10 +352,10 @@
                 conversationHistory.push({role: "assistant", content: response.response});
                 
                 // Add AI response to UI
-                addMessage(response.response, 'bot', getCurrentTime());
+                addMessage(response.response, 'ai', getCurrentTime());
             } catch (error) {
                 console.error('Error:', error);
-                addMessage('দুঃখিত, একটি ত্রুটি হয়েছে। আবার চেষ্টা করুন। (Sorry, an error occurred. Please try again.)', 'bot', getCurrentTime());
+                addMessage('দুঃখিত, একটি ত্রুটি হয়েছে। আবার চেষ্টা করুন। (Sorry, an error occurred. Please try again.)', 'ai', getCurrentTime());
             } finally {
                 // Hide typing indicator
                 typingIndicator.style.display = 'none';
@@ -275,14 +364,14 @@
 
         function addMessage(text, sender, timestamp) {
             const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${sender}-message`;
+            messageDiv.className = `deepseek-message ${sender}`;
             
             const messageText = document.createElement('div');
             messageText.textContent = text;
             messageDiv.appendChild(messageText);
             
             const timeSpan = document.createElement('div');
-            timeSpan.className = 'message-timestamp';
+            timeSpan.className = 'deepseek-timestamp';
             timeSpan.textContent = timestamp;
             messageDiv.appendChild(timeSpan);
             
