@@ -5,9 +5,10 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # API Settings
-DEEPSEEK_API_KEY = os.getenv("deepseek_api_key")
-BASE_URL = "https://openrouter.ai/api/v1"
-MODEL_NAME = "deepseek/deepseek-chat-v3-0324:free"
+GROQ_API_KEY = os.getenv("groq_api_key")
+DEEPSEEK_API_KEY = os.getenv("deepseek_api_key")  # Kept for backwards compatibility
+BASE_URL = "https://api.groq.com/openai/v1"
+MODEL_NAME = "meta-llama/llama-4-scout-17b-16e-instruct"
 
 # Application Settings
 APP_NAME = "Postmaster Chatbot"
